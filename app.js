@@ -23,6 +23,10 @@ O que deve acontecer quando a página recarrega?
 
 //início
 
+import { addTransacao } from "./modules/transactions.js";
+import { carregarTransacoes } from "./modules/transactions.js";
+
+//input e transformaçao do formulario em objeto
 const form = document.querySelector(".nova-transacao");
 
 form.addEventListener("submit", e => {
@@ -42,8 +46,23 @@ form.addEventListener("submit", e => {
         descricao,
         valor,
         tipo,
-        categoria: "",
+        categoria: categoriaEscolhida || "Sem categoria",
         data: new Date().toLocaleDateString("pt-PT")
     };
+    addTransacao(transacao);
     console.log(transacao);
+});
+
+//selecionar categoria e adicionar categoria ao objeto
+const categorias = document.querySelectorAll(".categorias");
+
+let categoriaEscolhida = "";
+
+categorias.forEach(cat => {
+    cat.addEventListener("click", e => {
+        categoriaEscolhida = cat.textContent;
+
+        categorias.forEach(c => c.classList.remove("selecionada"));
+        cat.classList.add("selecionada");
+    })
 });

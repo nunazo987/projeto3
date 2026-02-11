@@ -25,3 +25,24 @@ Resultado esperado: 250
 
 Não escreva loops tradicionais.
 */
+
+//inicio
+
+let transacoes = [];
+
+export function addTransacao(transacao){
+   transacoes.push(transacao);
+   localStorage.setItem("transacoes", JSON.stringify(transacoes));
+   salvarTransacoes();
+};
+
+function salvarTransacoes(){
+   localStorage.setItem("transacoes", JSON.stringify(transacoes));
+};
+
+export function carregarTransacoes(){
+   const dados = JSON.parse(localStorage.getItem("transacoes"));
+   if (dados) transacoes = dados; 
+};
+
+console.log(transacoes);

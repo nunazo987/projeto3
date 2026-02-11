@@ -301,6 +301,11 @@ body {
     border-radius: 8px;
 }
 
+.categorias.selecionada {
+    background-color: #4CAF50;
+    color: white;
+}
+
 .adiciona-historia {
     background-color: var(--primary-color);
     color: var(--secondary-color);
