@@ -26,6 +26,7 @@ O que deve acontecer quando a página recarrega?
 import { addTransacao } from "./modules/transactions.js";
 import { carregarTransacoes } from "./modules/transactions.js";
 
+carregarTransacoes();
 //input e transformaçao do formulario em objeto
 const form = document.querySelector(".nova-transacao");
 
@@ -37,7 +38,7 @@ form.addEventListener("submit", e => {
     const tipo = document.querySelector("#tipo-transacao").value;
 
     if (!descricao || !valor){
-        alert("Preencha todos os campos");
+        alert("Preencha todos os campos.");
         return
     };
 
@@ -50,7 +51,8 @@ form.addEventListener("submit", e => {
         data: new Date().toLocaleDateString("pt-PT")
     };
     addTransacao(transacao);
-    console.log(transacao);
+      
+
 });
 
 //selecionar categoria e adicionar categoria ao objeto
