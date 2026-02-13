@@ -24,19 +24,19 @@ Como garantir que o array nunca fique fora de sincronia?
 
 let transacoes = [];
 
-export function addTransacao(transacao){
-   transacoes.push(transacao);
-   const dados = JSON.parse(localStorage.getItem("transacoes"));
-   salvarTransacoes();
-};
+export function adicionarTransacao(transacao) {
+    transacoes.push(transacao);
+    salvarTransacoes();
+}
 
-function salvarTransacoes(){
-   localStorage.setItem("transacoes", JSON.stringify(transacoes));
-};
+export function carregarTransacoes() {
+    const dados = JSON.parse(localStorage.getItem("transacoes"));
+    if (dados) transacoes = dados;
+}
+export function obterTransacoes() {
+    return transacoes;
+}
+function salvarTransacoes() {
+    localStorage.setItem("transacoes", JSON.stringify(transacoes));
+}
 
-export function carregarTransacoes(){
-   const dados = JSON.parse(localStorage.getItem("transacoes"));
-   if (dados) transacoes = dados; 
-};
-
-console.log(transacoes);
