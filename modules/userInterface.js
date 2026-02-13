@@ -31,10 +31,10 @@ export function mostrarTransacoes(transacoes){
       const tipoClasse = t.tipo === "receita" ? "etiqueta-receita" : "etiqueta-despesa";
 
       li.innerHTML = `
-      <span class="transacao ${tipoClasse}">${t.tipo}</span>
-      <span class="categoria>${t.categoria}</span>
-      <span class="data>${t.data}</span>
-      <span class="valor>${t.valor.toFixed(2)}</span>
+      <span class="transacao ${tipoClasse}">${t.tipo.charAt(0).toUpperCase() + t.tipo.slice(1)}</span>
+      <span class="categoria">${t.categoria}</span>
+      <span class="data">${t.data}</span>
+      <span class="valor">${t.valor.toFixed(2)}</span>
       `;
       lista.appendChild(li);
    });
