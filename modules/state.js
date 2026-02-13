@@ -30,8 +30,8 @@ export function adicionarTransacao(transacao) {
 }
 
 export function carregarTransacoes() {
-    const dados = JSON.parse(localStorage.getItem("transacoes"));
-    if (dados) transacoes = dados;
+    const DADOS = JSON.parse(localStorage.getItem("transacoes"));
+    if (DADOS) transacoes = DADOS;
 }
 export function obterTransacoes() {
     return transacoes;

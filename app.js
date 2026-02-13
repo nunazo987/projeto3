@@ -31,25 +31,25 @@ carregarTransacoes();
 mostrarTransacoes(obterTransacoes());
 
 //input e transformaçao do formulario em objeto
-const form = document.querySelector(".nova-transacao");
+const FORM = document.querySelector(".nova-transacao");
 
-form.addEventListener("submit", e => {
+FORM.addEventListener("submit", e => {
     e.preventDefault()
     
-    const descricao = document.querySelector("#descricao").value.trim();
-    const valor = Number(document.querySelector("#quantidade").value);
-    const tipo = document.querySelector("#tipo-transacao").value;
+    const DESCRICAO = document.querySelector("#descricao").value.trim();
+    const VALOR = Number(document.querySelector("#quantidade").value);
+    const TIPO = document.querySelector("#tipo-transacao").value;
 
-    if (!descricao || !valor){
+    if (!DESCRICAO || !VALOR){
         alert("Preencha todos os campos.");
         return
     };
 
     const transacao = {
         id: Date.now(),
-        descricao,
-        valor,
-        tipo,
+        DESCRICAO,
+        VALOR,
+        TIPO,
         categoria: categoriaEscolhida || "Sem categoria",
         data: new Date().toLocaleDateString("pt-PT")
     };
