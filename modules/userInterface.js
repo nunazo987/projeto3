@@ -24,10 +24,11 @@ export function mostrarTransacoes(transacoes){
    LISTA.innerHTML = "";
 
    transacoes.forEach(t => {
+      if (!t.tipo || !t.descricao || !t.valor) return;
       const LI = document.createElement("div");
       LI.classList.add("item-transacao");
       LI.classList.add(t.tipo === "receita" ? "receita" : "despesa");
-
+  
       const TIPOCLASSE = t.tipo === "receita" ? "etiqueta-receita" : "etiqueta-despesa";
 
       LI.innerHTML = `

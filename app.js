@@ -32,6 +32,8 @@ mostrarTransacoes(obterTransacoes());
 
 //input e transformaçao do formulario em objeto
 const FORM = document.querySelector(".nova-transacao");
+const CATEGORIAS = document.querySelectorAll(".categorias");
+let categoriaEscolhida = "";
 
 FORM.addEventListener("submit", e => {
     e.preventDefault()
@@ -47,27 +49,28 @@ FORM.addEventListener("submit", e => {
 
     const transacao = {
         id: Date.now(),
-        DESCRICAO,
-        VALOR,
-        TIPO,
+        descricao: DESCRICAO,
+        valor: VALOR,
+        tipo: TIPO,
         categoria: categoriaEscolhida || "Sem categoria",
         data: new Date().toLocaleDateString("pt-PT")
     };
     adicionarTransacao(transacao);
-      
-    console.log("Estado atual: ", obterTransacoes());
+    mostrarTransacoes(obterTransacoes());
+    console.log(obterTransacoes());
+
+    FORM.reset();
+    categoriaEscolhida = "";
+    CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
 });
 
 //selecionar categoria e adicionar categoria ao objeto
-const categorias = document.querySelectorAll(".categorias");
 
-let categoriaEscolhida = "";
-
-categorias.forEach(cat => {
+CATEGORIAS.forEach(cat => {
     cat.addEventListener("click", e => {
         categoriaEscolhida = cat.textContent;
 
-        categorias.forEach(c => c.classList.remove("selecionada"));
+        CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
         cat.classList.add("selecionada");
     })
 });

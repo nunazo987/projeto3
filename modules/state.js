@@ -21,22 +21,18 @@ Como garantir que o array nunca fique fora de sincronia?
 */
 
 //inicio
+import { salvarTransacoes, carregarTransacoesStorage } from "./storage.js";
 
 let transacoes = [];
 
-export function adicionarTransacao(transacao) {
-    transacoes.push(transacao);
-    salvarTransacoes();
+export function carregarTransacoes() {
+    transacoes = carregarTransacoesStorage();
 }
 
-export function carregarTransacoes() {
-    const DADOS = JSON.parse(localStorage.getItem("transacoes"));
-    if (DADOS) transacoes = DADOS;
+export function adicionarTransacao(transacao) {
+    transacoes.push(transacao);
+    salvarTransacoes(transacoes);
 }
 export function obterTransacoes() {
     return transacoes;
 }
-function salvarTransacoes() {
-    localStorage.setItem("transacoes", JSON.stringify(transacoes));
-}
-
