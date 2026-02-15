@@ -1,7 +1,6 @@
 import { calcularSaldo } from "./transactions.js";
 import { removerTransacao, obterTransacoes } from "./state.js";
 
-// Atualiza os cards do topo
 export function atualizarCards(transacoes) {
     const saldoTotalElem = document.querySelector(".cards-container .card:nth-child(1) .valor");
     const rendaTotalElem = document.querySelector(".cards-container .card:nth-child(2) .valor");
@@ -12,9 +11,8 @@ export function atualizarCards(transacoes) {
     saldoTotalElem.textContent = `€ ${isNaN(saldo) ? "0,00" : saldo.toFixed(2)}`;
     rendaTotalElem.textContent = `€ ${isNaN(totalReceitas) ? "0,00" : totalReceitas.toFixed(2)}`;
     despesaTotalElem.textContent = `€ ${isNaN(totalDespesas) ? "0,00" : totalDespesas.toFixed(2)}`;
-}
+};
 
-// Mostra o histórico com botão de remover
 export function mostrarTransacoes(transacoes) {
     const LISTA = document.querySelector(".lista-transacoes");
     LISTA.innerHTML = "";
@@ -36,7 +34,6 @@ export function mostrarTransacoes(transacoes) {
             <button class="remover" data-id="${t.id}">Remover</button>
         `;
 
-        // botão remover
         LI.querySelector(".remover").addEventListener("click", () => {
             removerTransacao(t.id);
             mostrarTransacoes(obterTransacoes());
@@ -45,4 +42,4 @@ export function mostrarTransacoes(transacoes) {
 
         LISTA.appendChild(LI);
     });
-}
+};

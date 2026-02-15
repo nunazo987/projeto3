@@ -1,4 +1,3 @@
-/* RESET BÁSICO */
 * {
     margin: 0;
     padding: 0;
@@ -22,28 +21,13 @@ body {
     min-height: 100vh;
 
     display: grid;
-
-    /* 2 colunas:
-       180px fixa para sidebar
-       1fr ocupa o restante */
     grid-template-columns: 200px 1fr;
-
-    /* 3 linhas:
-       header
-       main (flexível)
-       footer */
     grid-template-rows: auto 1fr auto;
-
-    /* Nomeando as áreas */
     grid-template-areas:
         "sidebar header"
         "sidebar main"
         "sidebar footer";
 }
-
-/* ========================= */
-/* DEFININDO CADA ÁREA */
-/* ========================= */
 
 .sidebar {
     grid-area: sidebar;
@@ -142,13 +126,6 @@ body {
     align-items: center; 
 }
 
-/* .transacoes, .cards-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-} */
-
 .cards-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -164,16 +141,6 @@ body {
     width: 100%;
     max-width: 1200px;
     align-items: start;
-}
-
-.nova-transacao {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background-color: var(--card-background);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--card-borders);
 }
 
 .card {
@@ -214,6 +181,16 @@ body {
 
 .expense-color {
     color: var(--expense-color);
+}
+
+.nova-transacao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--card-borders);
 }
 
 .titulo-nova-transacao-container {
@@ -257,7 +234,8 @@ body {
     font-size: 12px;
 }
 
-.form-container input, .form-container select {
+.form-container input,
+.form-container select {
     padding: 8px;
     border: 1px solid var(--card-borders);
     border-radius: 4px;
@@ -278,7 +256,8 @@ body {
     width: 100%;
 }
 
-.qtd-container, .tipo-transacao-container {
+.qtd-container,
+.tipo-transacao-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -299,6 +278,7 @@ body {
     padding: 12px;
     border: 1px solid var(--card-borders);
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .categorias.selecionada {
@@ -324,20 +304,14 @@ body {
     font-weight: 600;
 }
 
-.titulo-historico-container {
+.historico {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;    
-}
-
-.icons-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;   
+    flex-direction: column;
+    background-color: var(--card-background);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--card-borders);
+    width: 100%;
 }
 
 .sub-titulo-historico {
@@ -349,83 +323,65 @@ body {
 
 .cabecalho-tabela {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr; 
-    padding: 10px 20px;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    padding: 12px 20px; 
     color: var(--gray-titles);
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
+.cabecalho-tabela span:nth-child(1),
+.cabecalho-tabela span:nth-child(2),
+.cabecalho-tabela span:nth-child(3) {
+    text-align: left;
+}
+
+.cabecalho-tabela span:nth-child(4) {
+    text-align: right;  
+}
+
 .item-transacao {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
     align-items: center;
     background-color: var(--card-background);
     border: 1px solid var(--card-borders);
     border-radius: 8px;
     padding: 12px 20px;
     margin-bottom: 12px;
+    gap: 8px;
 }
 
-.info-transacao {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.item-transacao .transacao {
+    font-size: 12px;
 }
 
-.historico {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--card-background);
-    padding: 24px;
-    border-radius: 12px;
-    border: 1px solid var(--card-borders);
-    width: 100%;
-
-}
-
-.caixa-icone {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--tertiary-color); 
-}
-
-.real-icon {
-    font-size: 14px;   
-}
-
-.nome-transacao {
+.item-transacao .categoria,
+.item-transacao .data {
+    font-size: 12px;
     color: var(--accent-color);
-    font-size: 12px;
-    font-weight: 500;
 }
 
-.etiqueta {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 8px;
+.item-transacao .valor {
+    justify-self: end;
     font-weight: bold;
-    display: inline-block;
-    background-color: var(--tertiary-color);
+    white-space: nowrap;
 }
 
-.etiqueta-receita { color: var(--primary-color); }
-.etiqueta-despesa { color: var(--expense-color); }
-
-.data-transacao {
-    color: var(--gray-titles);
-    font-size: 12px;
-}
-
-.valor-transacao {
+.remover {
+    background-color: transparent;
+    color: var(--expense-color);
+    border: none;
     font-weight: bold;
-    text-align: right;
-    font-size: 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    justify-self: end;
+}
+
+.item-transacao:hover .remover {
+    opacity: 1;
 }
 
 .rodape-tabela {
@@ -445,7 +401,6 @@ body {
     color: var(--accent-color);
 }
 
-
 .footer {
     grid-area: footer;
     background-color: var(--secondary-color);
@@ -453,63 +408,4 @@ body {
     font-weight: 500;
     padding: 15px;
     text-align: center;
-}
-
-.item-transacao {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr auto; 
-    align-items: center;
-    background-color: var(--card-background);
-    border: 1px solid var(--card-borders);
-    border-radius: 8px;
-    padding: 12px 20px;
-    margin-bottom: 12px;
-    position: relative;
-}
-
-.remover {
-    background-color: transparent;
-    color: var(--expense-color);
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0;             
-    transition: opacity 0.2s ease;
-}
-
-.item-transacao:hover .remover {
-    opacity: 1;             
-}
-
-.item-transacao span.valor {
-    display: flex;
-    justify-content: flex-end;
-    gap: 2px; 
-}
-
-.item-transacao span.valor::before {
-    content: "€";
-    font-weight: bold;
-}
-
-
-.item-transacao span.valor:not(:empty)::before {
-    content: "€"; 
-}
-
-
-.cabecalho-tabela span:nth-child(4) {
-    text-align: right; 
-}
-
-.item-transacao span.valor {
-    display: flex;
-    justify-content: flex-end; 
-    gap: 4px; 
-    font-weight: bold;
-}
-
-.item-transacao span.valor {
-    text-align: right;
-    padding-left: 4px; 
 }

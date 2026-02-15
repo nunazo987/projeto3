@@ -1,7 +1,6 @@
 import { adicionarTransacao, carregarTransacoes, obterTransacoes } from "./modules/state.js";
 import { mostrarTransacoes, atualizarCards } from "./modules/userInterface.js";
 
-// Categorias
 const CATEGORIAS = document.querySelectorAll(".categorias");
 let categoriaEscolhida = "";
 
@@ -14,7 +13,6 @@ CATEGORIAS.forEach(cat => {
     });
 });
 
-// Formulário
 const FORM = document.querySelector(".nova-transacao");
 
 FORM.addEventListener("submit", e => {
@@ -47,7 +45,6 @@ FORM.addEventListener("submit", e => {
     CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
 });
 
-// Inicialização
 carregarTransacoes();
 mostrarTransacoes(obterTransacoes());
 atualizarCards(obterTransacoes());
