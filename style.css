@@ -454,3 +454,62 @@ body {
     padding: 15px;
     text-align: center;
 }
+
+.item-transacao {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto; 
+    align-items: center;
+    background-color: var(--card-background);
+    border: 1px solid var(--card-borders);
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.remover {
+    background-color: transparent;
+    color: var(--expense-color);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;             
+    transition: opacity 0.2s ease;
+}
+
+.item-transacao:hover .remover {
+    opacity: 1;             
+}
+
+.item-transacao span.valor {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px; 
+}
+
+.item-transacao span.valor::before {
+    content: "€";
+    font-weight: bold;
+}
+
+
+.item-transacao span.valor:not(:empty)::before {
+    content: "€"; 
+}
+
+
+.cabecalho-tabela span:nth-child(4) {
+    text-align: right; 
+}
+
+.item-transacao span.valor {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 4px; 
+    font-weight: bold;
+}
+
+.item-transacao span.valor {
+    text-align: right;
+    padding-left: 4px; 
+}

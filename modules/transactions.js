@@ -1,27 +1,30 @@
 /*
 OBJETIVO:
 Calcular saldo total, total de receitas e total de despesas.
-
-PENSAMENTO:
-
-1) O saldo começa em 0.
-2) Para cada transação:
-   - Se for receita, soma.
-   - Se for despesa, subtrai.
-3) Para calcular totais separados:
-   - Filtrar por tipo.
-   - Somar valores.
-
-DICA IMPORTANTE:
-Use reduce().
-
-Pergunta:
-- O que é o acumulador?
-- Qual deve ser o valor inicial?
-
-Exemplo mental:
-[100, -50, 200]
-Resultado esperado: 250
-
-Não escreva loops tradicionais.
 */
+
+export function calcularSaldo(transacoes) {
+    const totalReceitas = transacoes
+        .filter(t => t.tipo === "receita")
+        .reduce((acc, t) => acc + t.valor, 0);
+
+    const totalDespesas = transacoes
+        .filter(t => t.tipo === "despesa")
+        .reduce((acc, t) => acc + t.valor, 0);
+
+    const saldo = totalReceitas - totalDespesas;
+
+    return { saldo, totalReceitas, totalDespesas };
+}
+
+export function calcularTotalReceitas(transacoes) {
+    return transacoes
+        .filter(t => t.tipo === "receita")
+        .reduce((acc, t) => acc + t.valor, 0);
+}
+
+export function calcularTotalDespesas(transacoes) {
+    return transacoes
+        .filter(t => t.tipo === "despesa")
+        .reduce((acc, t) => acc + t.valor, 0);
+}

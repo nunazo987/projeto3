@@ -24,7 +24,7 @@ localStorage só aceita strings.
 
 const CHAVE = "transacoes";
 
-export function salvarTransacoes() {
+export function salvarTransacoes(transacoes) {
     localStorage.setItem(CHAVE, JSON.stringify(transacoes));
 }
 

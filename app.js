@@ -1,51 +1,33 @@
-/*
-OBJETIVO:
-Conectar tudo.
-
-PASSO A PASSO:
-
-1) Capturar inputs do formulário.
-2) Escutar clique do botão.
-3) Validar dados.
-4) Criar objeto transação.
-5) Atualizar estado.
-6) Re-renderizar UI.
-7) Limpar formulário.
-
-IMPORTANTE:
-Sempre que adicionar uma transação:
-- Atualizar lista
-- Atualizar cards
-
-Pergunta:
-O que deve acontecer quando a página recarrega?
-*/
-
-//início
-
 import { adicionarTransacao, carregarTransacoes, obterTransacoes } from "./modules/state.js";
-import { mostrarTransacoes } from "./modules/userInterface.js";
+import { mostrarTransacoes, atualizarCards } from "./modules/userInterface.js";
 
-
-carregarTransacoes();
-mostrarTransacoes(obterTransacoes());
-
-//input e transformaçao do formulario em objeto
-const FORM = document.querySelector(".nova-transacao");
+// Categorias
 const CATEGORIAS = document.querySelectorAll(".categorias");
 let categoriaEscolhida = "";
 
+CATEGORIAS.forEach(cat => {
+    cat.addEventListener("click", () => {
+        categoriaEscolhida = cat.textContent;
+
+        CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
+        cat.classList.add("selecionada");
+    });
+});
+
+// Formulário
+const FORM = document.querySelector(".nova-transacao");
+
 FORM.addEventListener("submit", e => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     const DESCRICAO = document.querySelector("#descricao").value.trim();
     const VALOR = Number(document.querySelector("#quantidade").value);
     const TIPO = document.querySelector("#tipo-transacao").value;
 
-    if (!DESCRICAO || !VALOR){
+    if (!DESCRICAO || !VALOR) {
         alert("Preencha todos os campos.");
-        return
-    };
+        return;
+    }
 
     const transacao = {
         id: Date.now(),
@@ -55,23 +37,17 @@ FORM.addEventListener("submit", e => {
         categoria: categoriaEscolhida || "Sem categoria",
         data: new Date().toLocaleDateString("pt-PT")
     };
+
     adicionarTransacao(transacao);
     mostrarTransacoes(obterTransacoes());
-    console.log(obterTransacoes());
+    atualizarCards(obterTransacoes());
 
     FORM.reset();
     categoriaEscolhida = "";
     CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
 });
 
-//selecionar categoria e adicionar categoria ao objeto
-
-CATEGORIAS.forEach(cat => {
-    cat.addEventListener("click", e => {
-        categoriaEscolhida = cat.textContent;
-
-        CATEGORIAS.forEach(c => c.classList.remove("selecionada"));
-        cat.classList.add("selecionada");
-    })
-});
-
+// Inicialização
+carregarTransacoes();
+mostrarTransacoes(obterTransacoes());
+atualizarCards(obterTransacoes());

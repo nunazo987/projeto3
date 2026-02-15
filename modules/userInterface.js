@@ -1,42 +1,48 @@
-/*
-OBJETIVO:
-Atualizar a interface sempre que o estado mudar.
+import { calcularSaldo } from "./transactions.js";
+import { removerTransacao, obterTransacoes } from "./state.js";
 
-PENSAMENTO:
+// Atualiza os cards do topo
+export function atualizarCards(transacoes) {
+    const saldoTotalElem = document.querySelector(".cards-container .card:nth-child(1) .valor");
+    const rendaTotalElem = document.querySelector(".cards-container .card:nth-child(2) .valor");
+    const despesaTotalElem = document.querySelector(".cards-container .card:nth-child(3) .valor");
 
-1) Selecionar o container da lista.
-2) Limpar o conteúdo antes de renderizar novamente.
-3) Para cada transação:
-   - Criar elemento HTML dinamicamente.
-   - Inserir no DOM.
-4) Atualizar os cards com os valores calculados.
+    const { saldo, totalReceitas, totalDespesas } = calcularSaldo(transacoes);
 
-REFLEXÃO:
-- Por que limpar antes de renderizar?
-- O que acontece se não limpar?
+    saldoTotalElem.textContent = `€ ${isNaN(saldo) ? "0,00" : saldo.toFixed(2)}`;
+    rendaTotalElem.textContent = `€ ${isNaN(totalReceitas) ? "0,00" : totalReceitas.toFixed(2)}`;
+    despesaTotalElem.textContent = `€ ${isNaN(totalDespesas) ? "0,00" : totalDespesas.toFixed(2)}`;
+}
 
-DESAFIO:
-Como aplicar classes diferentes para receita e despesa?
-*/
+// Mostra o histórico com botão de remover
+export function mostrarTransacoes(transacoes) {
+    const LISTA = document.querySelector(".lista-transacoes");
+    LISTA.innerHTML = "";
 
-export function mostrarTransacoes(transacoes){
-   const LISTA = document.querySelector(".lista-transacoes");
-   LISTA.innerHTML = "";
+    transacoes.forEach(t => {
+        if (!t.tipo || !t.descricao || !t.valor) return;
 
-   transacoes.forEach(t => {
-      if (!t.tipo || !t.descricao || !t.valor) return;
-      const LI = document.createElement("div");
-      LI.classList.add("item-transacao");
-      LI.classList.add(t.tipo === "receita" ? "receita" : "despesa");
-  
-      const TIPOCLASSE = t.tipo === "receita" ? "etiqueta-receita" : "etiqueta-despesa";
+        const LI = document.createElement("div");
+        LI.classList.add("item-transacao");
+        LI.classList.add(t.tipo === "receita" ? "receita" : "despesa");
 
-      LI.innerHTML = `
-      <span class="transacao ${TIPOCLASSE}">${t.tipo.charAt(0).toUpperCase() + t.tipo.slice(1)}</span>
-      <span class="categoria">${t.categoria}</span>
-      <span class="data">${t.data}</span>
-      <span class="valor">${t.valor.toFixed(2)}</span>
-      `;
-      LISTA.appendChild(LI);
-   });
+        const TIPOCLASSE = t.tipo === "receita" ? "etiqueta-receita" : "etiqueta-despesa";
+
+        LI.innerHTML = `
+            <span class="transacao ${TIPOCLASSE}">${t.tipo.charAt(0).toUpperCase() + t.tipo.slice(1)}</span>
+            <span class="categoria">${t.categoria}</span>
+            <span class="data">${t.data}</span>
+            <span class="valor">€ ${t.valor.toFixed(2)}</span>
+            <button class="remover" data-id="${t.id}">Remover</button>
+        `;
+
+        // botão remover
+        LI.querySelector(".remover").addEventListener("click", () => {
+            removerTransacao(t.id);
+            mostrarTransacoes(obterTransacoes());
+            atualizarCards(obterTransacoes());
+        });
+
+        LISTA.appendChild(LI);
+    });
 }
