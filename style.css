@@ -239,8 +239,14 @@ body {
     padding: 8px;
     border: 1px solid var(--card-borders);
     border-radius: 4px;
-    background-color: transparent;
+    background-color: var(--tertiary-color);
     color: var(--accent-color);
+}
+
+.form-container select option {
+    background-color: var(--tertiary-color);
+    color: var(--accent-color);
+    padding: 8px;
 }
 
 .description-form {
