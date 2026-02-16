@@ -48,3 +48,21 @@ FORM.addEventListener("submit", e => {
 carregarTransacoes();
 mostrarTransacoes(obterTransacoes());
 atualizarCards(obterTransacoes());
+
+function atualizarDataAtual() {
+    const DATA = document.getElementById("data-atual");
+
+    const HOJE = new Date();
+
+    const OPCOES = {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    };
+
+    const DATAATUAL = HOJE.toLocaleDateString("pt-PT", OPCOES);
+
+    DATA.textContent = DATAATUAL;
+}
+
+atualizarDataAtual();

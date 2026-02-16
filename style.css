@@ -426,3 +426,70 @@ body {
 .item-transacao .transacao.despesa {
     color: var(--expense-color);
 }
+
+.receita-cor {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .transacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .qtd-tipo-transacao-container {
+        flex-direction: column;
+    }
+
+    .categoria-container {
+        justify-content: center;
+    }
+
+    .cabecalho-tabela {
+        display: none;
+    }
+
+    .item-transacao {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .item-transacao .valor {
+        justify-self: start;
+    }
+
+    .remover {
+        justify-self: start;
+    }
+}
