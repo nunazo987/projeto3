@@ -22,15 +22,15 @@ export function mostrarTransacoes(transacoes) {
 
         const LI = document.createElement("div");
         LI.classList.add("item-transacao");
-        LI.classList.add(t.tipo === "receita" ? "receita" : "despesa");
 
-        const TIPOCLASSE = t.tipo === "receita" ? "etiqueta-receita" : "etiqueta-despesa";
+        const TIPOCLASSE = t.tipo === "receita" ? "receita" : "despesa";
+        const VALORCLASSE = t.tipo === "receita" ? "receita" : "despesa";
 
         LI.innerHTML = `
             <span class="transacao ${TIPOCLASSE}">${t.tipo.charAt(0).toUpperCase() + t.tipo.slice(1)}</span>
             <span class="categoria">${t.categoria}</span>
             <span class="data">${t.data}</span>
-            <span class="valor">€ ${t.valor.toFixed(2)}</span>
+            <span class="valor ${VALORCLASSE}">€ ${t.valor.toFixed(2)}</span>
             <button class="remover" data-id="${t.id}">Remover</button>
         `;
 
